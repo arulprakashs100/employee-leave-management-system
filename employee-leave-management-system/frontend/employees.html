@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/employee.css">
+</head>
+<body>
+
+  <!-- Ambient Blobs -->
+  <div class="ambient-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="dashboard-wrapper">
+    
+    <!-- Admin Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <i class="fa-solid fa-plane-departure"></i>
+        </div>
+        <span class="sidebar-logo-txt">Vortex HR</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="admin-dashboard.html"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="sidebar-item active">
+          <a href="employees.html"><i class="fa-solid fa-users"></i> <span>Employees</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave-requests.html"><i class="fa-solid fa-envelope-open-text"></i> <span>Leave Requests</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="approved-leaves.html"><i class="fa-solid fa-circle-check"></i> <span>Approved Leaves</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="rejected-leaves.html"><i class="fa-solid fa-circle-xmark"></i> <span>Rejected Leaves</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> <span>Reports</span></a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <li class="sidebar-item" style="list-style: none;">
+          <a href="#" class="logout-trigger"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+      
+      <!-- Top Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="header-logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="header-title">Employee Leave Management System</span>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" title="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+          <div class="header-profile-box">
+            <div class="header-profile-trigger">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+          </div>
+          <button class="header-icon-btn logout-trigger" title="Logout">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Welcome Title Header -->
+      <div class="page-fade-in" style="margin-bottom: 8px;">
+        <h2 style="font-size: 22px; font-weight: 700; color: var(--text-primary);">Employee Management</h2>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">View and manage all registered employees in the organization.</p>
+      </div>
+
+      <!-- Dashboard Summary Cards -->
+      <div class="stats-grid page-fade-in" style="animation-delay: 0.05s;">
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Total Employees</span>
+            <span class="stat-number" id="card-emp-total">0</span>
+          </div>
+          <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Active Employees</span>
+            <span class="stat-number" id="card-emp-active">0</span>
+          </div>
+          <div class="stat-icon green"><i class="fa-solid fa-user-check"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Departments</span>
+            <span class="stat-number" id="card-emp-depts">0</span>
+          </div>
+          <div class="stat-icon purple"><i class="fa-solid fa-sitemap"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">New Employees</span>
+            <span class="stat-number" id="card-emp-new">0</span>
+          </div>
+          <div class="stat-icon blue" style="background:rgba(139,92,246,0.12); color:var(--accent-color);"><i class="fa-solid fa-user-plus"></i></div>
+        </div>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="glass-card page-fade-in" style="padding: 16px 24px; animation-delay: 0.1s;">
+        <div class="filter-toolbar" style="margin-bottom: 0;">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="employees-search" placeholder="Search by name, ID, or email...">
+          </div>
+
+          <div class="filter-controls-group">
+            <select id="employees-filter" class="filter-select-element">
+              <option value="all">All Branches</option>
+              <option value="Information Technology">Information Technology (IT)</option>
+              <option value="Computer Science">Computer Science (CSE)</option>
+              <option value="Electronics & Communication">Electronics & Communication (ECE)</option>
+              <option value="Electrical & Electronics">Electrical & Electronics (EEE)</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Civil">Civil</option>
+              <option value="Human Resources">Human Resources (HR)</option>
+              <option value="Finance">Finance</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employees Table Card -->
+      <div class="glass-card table-card page-fade-in" id="employees-table-wrapper" style="animation-delay: 0.15s;">
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Email</th>
+                <th>Branch</th>
+                <th>Registered Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-employees-tbody">
+              <!-- JS Injected rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Empty State Block -->
+      <div class="glass-card page-fade-in" id="empty-employees-illust" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 48px; text-align: center; animation-delay: 0.15s;">
+        <i class="fa-solid fa-users-slash" style="font-size: 56px; color: var(--text-muted); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--text-primary);">No employees have registered yet.</h3>
+      </div>
+
+      <!-- Navigation Actions at Bottom -->
+      <div class="page-fade-in" style="display: flex; gap: 12px; justify-content: flex-end; animation-delay: 0.2s;">
+        <a href="admin-dashboard.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dialog Modal Container (Backdrop) -->
+  <div class="modal-backdrop" id="employee-details-modal">
+    <div class="modal-content" style="max-width: 560px;">
+      <div class="modal-header-section" style="margin-bottom: 16px;">
+        <h3>Employee Dossier Profile</h3>
+        <i class="fa-solid fa-xmark modal-close-trigger" id="modal-dossier-close"></i>
+      </div>
+      
+      <!-- Personal Information -->
+      <h4 style="font-size: 12px; font-weight: 600; color: var(--primary-color); border-bottom:1px solid rgba(0,0,0,0.03); padding-bottom:4px; margin-bottom:10px;">Personal Information</h4>
+      <div class="details-grid" id="dossier-details" style="margin-top: 0; gap: 12px 16px;">
+        <!-- JS Injected Details -->
+      </div>
+
+      <!-- Leave Summary metrics -->
+      <h4 style="font-size: 12px; font-weight: 600; color: var(--primary-color); border-bottom:1px solid rgba(0,0,0,0.03); padding-bottom:4px; margin-top:20px; margin-bottom:8px;">Leave Summary</h4>
+      <div id="dossier-leaves-summary">
+        <!-- JS Injected summary cards -->
+      </div>
+
+      <!-- Recent Leave History -->
+      <h4 style="font-size: 12px; font-weight: 600; color: var(--primary-color); border-bottom:1px solid rgba(0,0,0,0.03); padding-bottom:4px; margin-top:20px; margin-bottom:8px;">Recent Leave History</h4>
+      <div class="table-responsive" style="max-height: 160px; overflow-y: auto; border: 1px solid var(--card-border); border-radius: 4px;">
+        <table class="dashboard-table" style="min-width: 0;">
+          <thead>
+            <tr>
+              <th style="padding: 8px 12px; font-size:10px;">Type</th>
+              <th style="padding: 8px 12px; font-size:10px;">From</th>
+              <th style="padding: 8px 12px; font-size:10px;">To</th>
+              <th style="padding: 8px 12px; font-size:10px;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="dossier-history-tbody">
+            <!-- JS Injected history rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dossier Actions buttons -->
+      <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 16px;">
+        <button class="btn btn-secondary" id="modal-dossier-back" style="border-radius: var(--radius-sm);">Back to Employee List</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

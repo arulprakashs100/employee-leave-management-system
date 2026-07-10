@@ -1,0 +1,228 @@
+/* Authentication styling layouts: auth.css */
+
+/* Index/Landing layout */
+.landing-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.landing-logo-box {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-gradient);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+  margin-bottom: 8px;
+}
+
+.landing-card h1 {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landing-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-style: italic;
+  max-width: 360px;
+  margin-bottom: 12px;
+}
+
+.landing-actions-row {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Forms layout details */
+.auth-title-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.auth-title-box-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--primary-gradient);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.auth-title-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 6px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--text-primary);
+  font-size: 13px;
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Role Selector */
+.role-selector {
+  display: flex;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  margin-bottom: 20px;
+}
+
+.role-tab {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.role-tab input[type="radio"] {
+  display: none;
+}
+
+.role-tab label {
+  display: block;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.role-tab input[type="radio"]:checked + label {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  outline: none;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+  opacity: 0.95;
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--card-border);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-full {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.auth-bottom-text {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 20px;
+}
+
+.auth-bottom-text a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.auth-bottom-text a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile responsive widths */
+@media (max-width: 480px) {
+  .glass-card {
+    padding: 24px 20px;
+  }
+}
+
+/* Restrict auth panel cards width specifically */
+.glass-card {
+  max-width: 480px;
+}

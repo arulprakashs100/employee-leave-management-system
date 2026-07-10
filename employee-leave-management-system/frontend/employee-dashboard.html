@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Dashboard</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/employee.css">
+</head>
+<body>
+
+  <!-- Ambient Blobs -->
+  <div class="ambient-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="dashboard-wrapper">
+    
+    <!-- Employee Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <i class="fa-solid fa-plane-departure"></i>
+        </div>
+        <span class="sidebar-logo-txt">Vortex HR</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item active">
+          <a href="employee-dashboard.html"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="apply-leave.html"><i class="fa-solid fa-calendar-plus"></i> <span>Apply Leave</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave-status.html"><i class="fa-solid fa-clock-rotate-left"></i> <span>Leave Status</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html"><i class="fa-solid fa-user-gear"></i> <span>Profile</span></a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <li class="sidebar-item" style="list-style: none;">
+          <a href="#" class="logout-trigger"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+      
+      <!-- Top Navigation Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="header-logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="header-title">Employee Leave Management System</span>
+        </div>
+
+        <div class="header-right">
+          <!-- Notification Icon -->
+          <div style="position: relative;">
+            <button class="header-icon-btn" id="notif-trigger">
+              <i class="fa-solid fa-bell"></i>
+              <span class="header-icon-badge" id="notif-badge" style="display: none;"></span>
+            </button>
+            
+            <div class="notif-panel" id="notif-panel">
+              <div class="notif-header">Recent Updates</div>
+              <ul class="notif-list" id="notif-list">
+                <!-- JS Injected Notifications -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Profile Dropdown Trigger -->
+          <div class="header-profile-box">
+            <div class="header-profile-trigger" id="profile-trigger">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            
+            <div class="dropdown-menu" id="profile-menu">
+              <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user-gear"></i> My Profile</a>
+              <a href="#" class="dropdown-item"><i class="fa-solid fa-sliders"></i> Settings</a>
+              <hr style="border: none; border-top: 1px solid var(--card-border); margin: 4px 0;">
+              <a href="#" class="dropdown-item logout-trigger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+
+          <!-- Logout Button -->
+          <button class="header-icon-btn logout-trigger" title="Logout">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Welcome Section Banner -->
+      <div class="welcome-box page-fade-in">
+        <div class="welcome-box-text">
+          <h2>Welcome, <span id="employee-display-name">Employee</span> 👋</h2>
+          <p>Manage your leave requests and track their approval status easily.</p>
+        </div>
+        <div class="welcome-box-icon">
+          <i class="fa-solid fa-hands-clapping"></i>
+        </div>
+      </div>
+
+      <!-- Dashboard Statistics Cards Grid -->
+      <div class="stats-grid page-fade-in" style="animation-delay: 0.1s;">
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Total Leaves</span>
+            <span class="stat-number" id="stat-total">0</span>
+          </div>
+          <div class="stat-icon blue"><i class="fa-solid fa-calculator"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Leaves This Week</span>
+            <span class="stat-number" id="stat-week">0</span>
+          </div>
+          <div class="stat-icon purple"><i class="fa-solid fa-calendar-week"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Leaves This Month</span>
+            <span class="stat-number" id="stat-month">0</span>
+          </div>
+          <div class="stat-icon green"><i class="fa-solid fa-calendar-check"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Cancelled / Rejected</span>
+            <span class="stat-number" id="stat-bad">0</span>
+          </div>
+          <div class="stat-icon red"><i class="fa-solid fa-ban"></i></div>
+        </div>
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <div class="actions-grid page-fade-in" style="animation-delay: 0.2s;">
+        <a href="apply-leave.html" class="glass-card action-card">
+          <div class="action-card-icon"><i class="fa-solid fa-calendar-plus"></i></div>
+          <div class="action-card-info">
+            <h4>Apply Leave</h4>
+            <p>Submit a new leave request application form.</p>
+          </div>
+          <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </a>
+
+        <a href="leave-status.html" class="glass-card action-card">
+          <div class="action-card-icon" style="background:var(--accent-color);"><i class="fa-solid fa-list-check"></i></div>
+          <div class="action-card-info">
+            <h4>View Leave Status</h4>
+            <p>Check active quota balances and pending logs.</p>
+          </div>
+          <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </a>
+
+        <a href="profile.html" class="glass-card action-card">
+          <div class="action-card-icon" style="background:var(--success-color);"><i class="fa-solid fa-user-astronaut"></i></div>
+          <div class="action-card-info">
+            <h4>My Profile</h4>
+            <p>Modify personal parameters or passwords.</p>
+          </div>
+          <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </a>
+      </div>
+
+      <!-- Recent Requests Table Grid -->
+      <div class="glass-card table-card page-fade-in" style="animation-delay: 0.3s;">
+        <div class="table-header">
+          <h3>Recent Leave Requests</h3>
+        </div>
+        
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Leave Type</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Days</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="recent-leaves-tbody">
+              <!-- JS Injected Rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/dashboard.js"></script>
+  <script src="js/employee.js"></script>
+</body>
+</html>

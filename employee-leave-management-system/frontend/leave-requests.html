@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Request Management</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/employee.css">
+  <style>
+    /* Styling for bulk actions and page buttons */
+    .bulk-actions-toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 4px 0;
+    }
+    .page-controls-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Blobs -->
+  <div class="ambient-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="dashboard-wrapper">
+    
+    <!-- Admin Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <i class="fa-solid fa-plane-departure"></i>
+        </div>
+        <span class="sidebar-logo-txt">Vortex HR</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="admin-dashboard.html"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="employees.html"><i class="fa-solid fa-users"></i> <span>Employees</span></a>
+        </li>
+        <li class="sidebar-item active">
+          <a href="leave-requests.html"><i class="fa-solid fa-envelope-open-text"></i> <span>Leave Requests</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="approved-leaves.html"><i class="fa-solid fa-circle-check"></i> <span>Approved Leaves</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="rejected-leaves.html"><i class="fa-solid fa-circle-xmark"></i> <span>Rejected Leaves</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> <span>Reports</span></a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <li class="sidebar-item" style="list-style: none;">
+          <a href="#" class="logout-trigger"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+      
+      <!-- Top Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="header-logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="header-title">Employee Leave Management System</span>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" title="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+          <div class="header-profile-box">
+            <div class="header-profile-trigger">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+          </div>
+          <button class="header-icon-btn logout-trigger" title="Logout">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Welcome Title Header -->
+      <div class="page-fade-in" style="margin-bottom: 8px;">
+        <h2 style="font-size: 22px; font-weight: 700; color: var(--text-primary);">Leave Request Management</h2>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Review all employee leave requests and take appropriate action.</p>
+      </div>
+
+      <!-- Dashboard Summary Cards -->
+      <div class="stats-grid page-fade-in" style="animation-delay: 0.05s;">
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Total Leave Requests</span>
+            <span class="stat-number" id="req-card-total">0</span>
+          </div>
+          <div class="stat-icon blue"><i class="fa-solid fa-envelope-open-text"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Pending Requests</span>
+            <span class="stat-number" id="req-card-pending">0</span>
+          </div>
+          <div class="stat-icon purple"><i class="fa-solid fa-hourglass-half"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Approved Requests</span>
+            <span class="stat-number" id="req-card-approved">0</span>
+          </div>
+          <div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+        </div>
+
+        <div class="glass-card stat-card">
+          <div class="stat-info">
+            <span class="stat-title">Rejected Requests</span>
+            <span class="stat-number" id="req-card-rejected">0</span>
+          </div>
+          <div class="stat-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+        </div>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="glass-card page-fade-in" style="padding: 16px 24px; animation-delay: 0.1s;">
+        <div class="filter-toolbar" style="margin-bottom: 0;">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="requests-search" placeholder="Search ID, name, email or leave type...">
+          </div>
+
+          <div class="filter-controls-group">
+            <select id="requests-status-filter" class="filter-select-element">
+              <option value="all">All Requests</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+            <select id="requests-branch-filter" class="filter-select-element">
+              <option value="all">All Branches</option>
+              <option value="Information Technology">IT</option>
+              <option value="Computer Science">CSE</option>
+              <option value="Electronics & Communication">ECE</option>
+              <option value="Electrical & Electronics">EEE</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Civil">Civil</option>
+              <option value="Human Resources">HR</option>
+              <option value="Finance">Finance</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bulk Actions Row -->
+      <div class="bulk-actions-toolbar page-fade-in" style="animation-delay: 0.12s; padding: 0 4px;">
+        <button class="btn btn-primary" id="bulk-approve-btn" style="background:var(--success-color); box-shadow:none; padding:8px 16px; border-radius:var(--radius-sm);" disabled>
+          <i class="fa-solid fa-circle-check"></i> Approve Selected
+        </button>
+        <button class="btn btn-primary" id="bulk-reject-btn" style="background:var(--danger-color); box-shadow:none; padding:8px 16px; border-radius:var(--radius-sm);" disabled>
+          <i class="fa-solid fa-circle-xmark"></i> Reject Selected
+        </button>
+      </div>
+
+      <!-- Requests Table wrapper -->
+      <div class="glass-card table-card page-fade-in" id="requests-table-wrapper" style="animation-delay: 0.15s;">
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th style="width: 40px;"><input type="checkbox" id="select-all-requests"></th>
+                <th>Request ID</th>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Branch</th>
+                <th>Leave Type</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Days</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-requests-tbody">
+              <!-- JS Injected rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Controls Footer -->
+        <div class="page-controls-footer">
+          <span style="font-size: 12px; color: var(--text-muted);" id="req-pagination-info">Showing 1 to 5 of 12 requests</span>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button class="page-control-btn" id="req-prev-btn" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <div id="req-pagination-numbers" style="display:flex; gap:6px;"></div>
+            <button class="page-control-btn" id="req-next-btn" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State Graphic -->
+      <div class="glass-card page-fade-in" id="empty-requests-illust" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 48px; text-align: center; animation-delay: 0.15s;">
+        <i class="fa-solid fa-envelope-open-text" style="font-size: 56px; color: var(--text-muted); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--text-primary);">No leave requests available for review.</h3>
+      </div>
+
+      <!-- Navigation Actions at Bottom -->
+      <div class="page-fade-in" style="display: flex; gap: 12px; justify-content: flex-end; animation-delay: 0.2s; margin-top:20px;">
+        <a href="admin-dashboard.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+        <a href="employees.html" class="btn btn-secondary"><i class="fa-solid fa-users"></i> View Employees</a>
+        <a href="approved-leaves.html" class="btn btn-secondary"><i class="fa-solid fa-circle-check"></i> Approved Leaves</a>
+        <a href="rejected-leaves.html" class="btn btn-secondary"><i class="fa-solid fa-circle-xmark"></i> Rejected Leaves</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Rejection Modal Backdrop (Popup Dialog) -->
+  <div class="modal-backdrop" id="reject-comment-modal">
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="modal-header-section">
+        <h3>Reason for Rejection</h3>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px; margin-top:10px;">
+        <textarea id="reject-reason-input" placeholder="Explain rejection reason (e.g. Insufficient leave balance)..." rows="4" style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--card-border); outline:none; font-family:inherit; resize:none; font-size:13px;"></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button class="btn btn-secondary" id="reject-cancel-btn" style="border-radius:var(--radius-sm)">Cancel</button>
+          <button class="btn btn-primary" id="reject-confirm-btn" style="background:var(--danger-color); box-shadow:none; border-radius:var(--radius-sm)">Confirm Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leave Details Modal Container (Backdrop) -->
+  <div class="modal-backdrop" id="details-modal">
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="modal-header-section" style="margin-bottom: 16px;">
+        <h3>Leave Application Dossier</h3>
+        <i class="fa-solid fa-xmark modal-close-trigger" id="modal-close"></i>
+      </div>
+      <div class="details-grid" id="modal-details-grid">
+        <!-- JS Injected Details -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

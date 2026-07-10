@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+
+  <!-- Ambient Blobs -->
+  <div class="ambient-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="dashboard-wrapper">
+    
+    <!-- Sidebar (Loaded dynamically by JS based on role) -->
+    <aside class="sidebar" id="profile-sidebar">
+      <!-- Injected Sidebar menu -->
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+      
+      <!-- Top Navigation Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="header-logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="header-title">Employee Leave Management System</span>
+        </div>
+
+        <div class="header-right">
+          <!-- Notification Icon -->
+          <button class="header-icon-btn" title="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+          
+          <!-- Profile -->
+          <div class="header-profile-box">
+            <div class="header-profile-trigger">
+              <i class="fa-solid fa-user-gear"></i>
+            </div>
+          </div>
+
+          <!-- Logout Button -->
+          <button class="header-icon-btn logout-trigger" title="Logout">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Welcome Title Header -->
+      <div class="page-fade-in" style="margin-bottom: 8px;">
+        <h2 style="font-size: 22px; font-weight: 700; color: var(--text-primary);" id="profile-title-txt">Profile & Settings</h2>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;" id="profile-subtitle-txt">View and manage your personal account information.</p>
+      </div>
+
+      <!-- Unified Profile split grid layout -->
+      <div class="profile-layout-grid page-fade-in" style="animation-delay: 0.05s;">
+        
+        <!-- Left: Profile card stats details -->
+        <div class="glass-card profile-card">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar-img" id="prof-card-avatar">A</div>
+            <label for="prof-avatar-file" class="profile-avatar-upload-overlay">
+              <i class="fa-solid fa-camera"></i>
+            </label>
+            <input type="file" id="prof-avatar-file" style="display:none;" accept="image/*">
+          </div>
+
+          <h3 class="profile-info-name" id="prof-card-name">Arul Prakash</h3>
+          <p class="profile-info-email" id="prof-card-email">arul@company.com</p>
+          <span class="profile-badge-role purple" id="prof-card-badge">Employee</span>
+
+          <!-- Stats BADGES list -->
+          <div class="profile-details-list" id="prof-card-info-list">
+            <!-- JS Injected counts -->
+          </div>
+        </div>
+
+        <!-- Right: Settings Form Tabs card -->
+        <div class="glass-card profile-tabs-card">
+          <div class="profile-tabs-header">
+            <button class="profile-tab-btn active" data-tab="tab-edit"><i class="fa-solid fa-user-pen"></i> Personal Information</button>
+            <button class="profile-tab-btn" data-tab="tab-password"><i class="fa-solid fa-key"></i> Security Settings</button>
+            <button class="profile-tab-btn" data-tab="tab-settings"><i class="fa-solid fa-sliders"></i> Preferences</button>
+          </div>
+
+          <!-- Tab Content 1: Edit profile -->
+          <div class="tab-content active" id="tab-edit">
+            <form id="edit-profile-form" style="display:flex; flex-direction:column; gap:16px;">
+              
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="prof-input-name">Full Name</label>
+                  <input type="text" id="prof-input-name" placeholder="Enter full name...">
+                </div>
+                <div class="form-group">
+                  <label for="prof-input-email">Email Address</label>
+                  <input type="email" id="prof-input-email" class="readonly-field" readonly>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group" id="label-prof-id">
+                  <label>Employee ID</label>
+                  <input type="text" id="prof-input-id" class="readonly-field" readonly>
+                </div>
+                <div class="form-group" id="label-prof-branch">
+                  <label>Branch</label>
+                  <input type="text" id="prof-input-branch" class="readonly-field" readonly>
+                </div>
+              </div>
+
+              <div class="form-group" style="max-width: 49%;" id="label-prof-phone">
+                <label for="prof-input-phone">Phone Number (Optional)</label>
+                <input type="tel" id="prof-input-phone" placeholder="Enter phone number (e.g. +91 98765 43210)...">
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-top: 16px; border-top:1px solid var(--card-border); padding-top:16px;">
+                <button class="btn btn-primary" id="prof-save-btn" style="border-radius: var(--radius-sm);"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Tab Content 2: Change password -->
+          <div class="tab-content" id="tab-password">
+            <form id="change-pwd-form" style="display:flex; flex-direction:column; gap:16px; max-width: 520px;">
+              <div class="form-group">
+                <label for="pwd-current">Current Password</label>
+                <input type="password" id="pwd-current" placeholder="Enter current password...">
+              </div>
+              <div class="form-group">
+                <label for="pwd-new">New Password</label>
+                <input type="password" id="pwd-new" placeholder="Enter new password (minimum 8 characters)...">
+              </div>
+              <div class="form-group">
+                <label for="pwd-confirm">Confirm New Password</label>
+                <input type="password" id="pwd-confirm" placeholder="Confirm new password...">
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-top: 16px; border-top:1px solid var(--card-border); padding-top:16px;">
+                <button class="btn btn-primary" id="prof-password-btn" style="border-radius: var(--radius-sm);"><i class="fa-solid fa-lock"></i> Change Password</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tab Content 3: Preferences Settings -->
+          <div class="tab-content" id="tab-settings">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              
+              <!-- Dark Theme Switch -->
+              <div class="setting-row">
+                <div class="setting-info">
+                  <span class="setting-title">Dark Mode Theme</span>
+                  <span class="setting-description">Shift the user interface into a dark gradient style.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-theme-dark">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- Email Notifications -->
+              <div class="setting-row">
+                <div class="setting-info">
+                  <span class="setting-title">Email Notifications</span>
+                  <span class="setting-description">Receive immediate leave application status alerts on your email.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-notif-email" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- In-App Notifications -->
+              <div class="setting-row">
+                <div class="setting-info">
+                  <span class="setting-title">In-App Notifications</span>
+                  <span class="setting-description">Show popups inside notifications bells and headers dashboards.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-notif-inapp" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- Language Select dropdown -->
+              <div class="setting-row" style="align-items: flex-start; flex-direction: column; gap: 8px;">
+                <div class="setting-info">
+                  <span class="setting-title">Language Preferences</span>
+                  <span class="setting-description">Select system display translation dialect.</span>
+                </div>
+                <select class="filter-select-element" style="max-width: 240px; margin-top: 4px; padding: 8px 12px; height: auto;">
+                  <option value="en">English (US)</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

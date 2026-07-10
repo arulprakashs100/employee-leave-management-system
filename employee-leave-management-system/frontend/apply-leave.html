@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply Leave</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/employee.css">
+</head>
+<body>
+
+  <!-- Ambient Blobs -->
+  <div class="ambient-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="dashboard-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <i class="fa-solid fa-plane-departure"></i>
+        </div>
+        <span class="sidebar-logo-txt">Vortex HR</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="employee-dashboard.html"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="sidebar-item active">
+          <a href="apply-leave.html"><i class="fa-solid fa-calendar-plus"></i> <span>Apply Leave</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave-status.html"><i class="fa-solid fa-clock-rotate-left"></i> <span>Leave Status</span></a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html"><i class="fa-solid fa-user-gear"></i> <span>Profile</span></a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <li class="sidebar-item" style="list-style: none;">
+          <a href="#" class="logout-trigger"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+      
+      <!-- Top Header -->
+      <header class="header">
+        <div class="header-left">
+          <div class="header-logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="header-title">Employee Leave Management System</span>
+        </div>
+
+        <div class="header-right">
+          <!-- Notification Icon -->
+          <div style="position: relative;">
+            <button class="header-icon-btn" id="notif-trigger">
+              <i class="fa-solid fa-bell"></i>
+              <span class="header-icon-badge" id="notif-badge" style="display: none;"></span>
+            </button>
+            <div class="notif-panel" id="notif-panel">
+              <div class="notif-header">Recent Updates</div>
+              <ul class="notif-list" id="notif-list"></ul>
+            </div>
+          </div>
+
+          <!-- Profile -->
+          <div class="header-profile-box">
+            <div class="header-profile-trigger" id="profile-trigger">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="dropdown-menu" id="profile-menu">
+              <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user-gear"></i> My Profile</a>
+              <a href="#" class="dropdown-item"><i class="fa-solid fa-sliders"></i> Settings</a>
+              <hr style="border: none; border-top: 1px solid var(--card-border); margin: 4px 0;">
+              <a href="#" class="dropdown-item logout-trigger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+
+          <button class="header-icon-btn logout-trigger" title="Logout">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Form Card -->
+      <div class="glass-card page-fade-in" style="max-width: 800px; margin: 0 auto; width: 100%;">
+        <div style="border-bottom: 1px solid var(--card-border); padding-bottom: 16px; margin-bottom: 24px;">
+          <h2 style="font-size: 22px; font-weight: 700; color: var(--text-primary);"><i class="fa-solid fa-calendar-plus" style="color:var(--primary-color)"></i> Apply Leave</h2>
+          <p class="form-subtitle">Fill in the required details to submit your leave request. Once submitted, it will be sent to the administrator for review.</p>
+        </div>
+
+        <form id="leave-apply-form" class="form-grid">
+          <!-- Employee Information (Read-only) -->
+          <h3 style="font-size: 14px; font-weight: 600; color: var(--primary-color); border-bottom: 1px solid rgba(0,0,0,0.03); padding-bottom: 8px;">Employee Information</h3>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <label for="emp-id">Employee ID</label>
+              <input type="text" id="emp-id" readonly>
+            </div>
+            <div class="form-col">
+              <label for="emp-name">Employee Name</label>
+              <input type="text" id="emp-name" readonly>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-col">
+              <label for="emp-email">Email ID</label>
+              <input type="email" id="emp-email" readonly>
+            </div>
+            <div class="form-col">
+              <label for="emp-branch">Branch</label>
+              <input type="text" id="emp-branch" readonly>
+            </div>
+          </div>
+
+          <!-- Leave Details -->
+          <h3 style="font-size: 14px; font-weight: 600; color: var(--primary-color); border-bottom: 1px solid rgba(0,0,0,0.03); padding-bottom: 8px; margin-top: 10px;">Leave Details</h3>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <label for="leave-type">Leave Type</label>
+              <select id="leave-type" required>
+                <option value="" disabled selected>Select Leave Type...</option>
+                <option value="Casual Leave">Casual Leave</option>
+                <option value="Sick Leave">Sick Leave</option>
+                <option value="Earned Leave">Earned Leave</option>
+                <option value="Emergency Leave">Emergency Leave</option>
+                <option value="Half Day">Half Day</option>
+                <option value="Work From Home">Work From Home</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Leave Duration -->
+          <div class="form-row">
+            <div class="form-col">
+              <label for="leave-from">From Date</label>
+              <input type="date" id="leave-from" required>
+            </div>
+            <div class="form-col">
+              <label for="leave-to">To Date</label>
+              <input type="date" id="leave-to" required>
+            </div>
+          </div>
+
+          <!-- Real-time days calculated result display -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+            <span style="font-size: 12px; font-weight: 500; color: var(--text-secondary);">Calculated Duration:</span>
+            <span id="total-days-badge" class="days-count-badge">0 Days</span>
+          </div>
+
+          <!-- Reason for Leave -->
+          <div class="form-row">
+            <div class="form-col">
+              <label for="leave-reason">Reason for Leave</label>
+              <textarea id="leave-reason" placeholder="Explain why you are requesting leave..." rows="4" required></textarea>
+            </div>
+          </div>
+
+          <!-- Attachment (Optional) -->
+          <div class="form-row">
+            <div class="form-col">
+              <label>Attachment (Optional)</label>
+              <div class="file-upload-card">
+                <i class="fa-solid fa-cloud-arrow-up file-upload-icon"></i>
+                <div class="file-upload-text">Click here or drag files to upload documents</div>
+                <input type="file" id="attachment">
+                <div id="file-upload-name" class="file-upload-name"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="form-actions">
+            <a href="employee-dashboard.html" class="btn btn-secondary" style="border-radius:var(--radius-sm)"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+            <button type="reset" class="btn btn-secondary" style="border-radius:var(--radius-sm)"><i class="fa-solid fa-rotate-left"></i> Reset Form</button>
+            <button type="submit" class="btn btn-primary" style="border-radius:var(--radius-sm)"><i class="fa-solid fa-paper-plane"></i> Submit Leave Request</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/leave.js"></script>
+</body>
+</html>
