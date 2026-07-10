@@ -225,7 +225,7 @@ Password : Admin@123
 
 Java Full Stack Developer
 
-- GitHub: https://github.com/arulprakashs100
+- GitHub: https://github.com/arulprakashs100/employee-leave-management-system
 
 ---
 
